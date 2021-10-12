@@ -1,0 +1,167 @@
+    *,
+    *::before,
+    *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+     :root {
+        --color-yellow: #f1c40f;
+        --color-red: #db2b39;
+        --color-blue-dark: #29335c;
+        --color-blue: #2130b3;
+        --size-btn-collapse: 10.5rem;
+        --time-animation: 0.3s;
+    }
+    
+    body {
+        font-family: sans-serif;
+    }
+    /* quita el formato de los links */
+    
+    .nav-main a {
+        text-decoration: none;
+        color: inherit
+    }
+    /* barra amarilla superior */
+    
+    .nav-main {
+        background-color: var(--color-yellow);
+        padding: 0.6rem 1.2rem;
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+    /* Estilo al Boton e imput */
+    
+    .nav-main_btn-collapse-icon {
+        width: 45px;
+        height: 45px;
+        border-radius: 50px;
+        background-color: indigo;
+        padding: 0.6rem 0.3rem;
+        z-index: 10;
+        cursor: pointer;
+        box-shadow: 3px 7px 7px gray;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+    }
+    
+    .icon-nav {
+        display: block;
+        width: 60%;
+        height: 2px;
+        background-color: white;
+        transition: transform calc(var(--time-animation)/2);
+    }
+    /* Animación del icono del menu */
+    
+    .nav-main_btn-collapse:checked+.nav-main_btn-collapse-icon .icon-nav:first-child {
+        transform: translateY(0.5em) rotate(45deg);
+    }
+    
+    .nav-main_btn-collapse:checked+.nav-main_btn-collapse-icon .icon-nav:nth-of-type(2) {
+        transform: scale(0);
+    }
+    
+    .nav-main_btn-collapse:checked+.nav-main_btn-collapse-icon .icon-nav:last-child {
+        transform: translateY(-0.6em) rotate(-45deg);
+    }
+    /* ocultar el icino del Checkbox */
+    
+    .nav-main_btn-collapse {
+        display: none;
+    }
+    /* Estilo al Box Red */
+    
+    .nav-main_btn-collapse-bg {
+        height: 100%;
+        width: var(--size-btn-collapse);
+        background-color: var(--color-red);
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: translateX(calc(var(--size-btn-collapse)/2*-1));
+        transition: transform var(--time-animation);
+    }
+    
+    .nav-main_btn-collapse:checked~.nav-main_btn-collapse-bg {
+        transform: translateX(0)
+    }
+    /* Estilo al social-networks */
+    
+    .social-networks {
+        background-color: var(--color-blue);
+        border-radius: 0 1rem 1rem 0;
+        padding: 0.4rem;
+        padding-left: 1.5rem;
+        color: white;
+        box-shadow: 3px 7px 7px gray;
+        z-index: 1;
+        margin-left: -1rem;
+        transform: scale(0);
+        transition: transform var(--time-animation);
+        transform-origin: left;
+    }
+    
+    .solcial-networks_link-items {
+        margin: 0 1rem;
+        opacity: 0;
+    }
+    
+    .nav-main_btn-collapse:checked~.social-networks {
+        transform: scaleX(1)
+    }
+    
+    .nav-main_btn-collapse:checked~.social-networks .solcial-networks_link-items {
+        animation: effectOpacity var(--time-animation) 0.2s forwards;
+    }
+    /* Estilo al nav-main_menu */
+    
+    .nav-main_menu {
+        position: absolute;
+        left: 0;
+        top: 100%;
+        display: flex;
+        flex-direction: column;
+        width: var(--size-btn-collapse);
+        /* height: calc(100vh-65px); */
+        height: 37rem;
+        background-color: var(--color-red);
+        padding: 2rem;
+        font-weight: 300;
+        box-shadow: 3px 7px 7px gray;
+        color: white;
+        transform: scaleY(0);
+        transition: transform var(--time-animation);
+        transform-origin: top;
+    }
+    /* Estilos a las anclas del menu */
+    
+    .nav-main_link-item {
+        margin-bottom: 2rem;
+        opacity: 0;
+    }
+    
+    .nav-main_link-item>.far {
+        display: inline-block;
+        margin-right: 0.6rem;
+    }
+    
+    .nav-main_btn-collapse:checked~.nav-main_menu {
+        transform: scaleY(1)
+    }
+    /* Efecto a los items del menu */
+    
+    .nav-main_btn-collapse:checked~.nav-main_menu .nav-main_link-item {
+        animation: effectOpacity var(--time-animation) 0.2s forwards;
+    }
+    
+    @keyframes effectOpacity {
+        to {
+            opacity: 1;
+        }
+    }
